@@ -678,6 +678,11 @@ nav i.icon-basic-eye {
 	border:none;
 	border-bottom: none;
 }
+
+.navbar-inner1 {
+	background-color: #fff;
+    	background-color: rgba(255,255,255,.8)
+}
 #blog-post .navbar-inner {
 	background-color: #fff;
 	background-color: rgba(255,255,255,.9);
