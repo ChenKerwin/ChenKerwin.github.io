@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-  <title>关于我 | Kerwin&#39;s Home</title>
+  <title>socket进行通信 | Kerwin&#39;s Home</title>
   <!-- Meta data -->
     <meta http-equiv="Content-Type" content="text/html" charset="UTF-8" >
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
@@ -167,93 +167,64 @@
         <!-- ============================ Header & Logo bar =========================== -->
 
 
-      <!-- ============================ Hero Image =========================== -->
-
-<section id="hero" class="scrollme">
-    <div class="container-fluid element-img" style="background: url(/img/bg_img.jpg) no-repeat center center fixed;background-size: cover">
-        <div class="row">
-            <div class="col-xs-12 col-sm-8 col-sm-offset-2 col-md-8 col-md-offset-2 vertical-align cover boost text-center">
-                <div class="center-me animateme" data-when="exit" data-from="0" data-to="0.6" data-opacity="0" data-translatey="100">
-                    <div class="navbar-inner1">
-                        
-                        <h2>YOU'VE MADE A <span>BRAVE</span> DECISION, WELCOME.</h2>
-                        <p></p>
-                        
-                        <h2></h2>
-                        <p>每一个不曾起舞的日子都是对生命的辜负。</p>
-                        
-
-                    </div>
-                </div>
-            </div>
-            <!-- // .col-md-12 -->
-        </div>
-        <div class="herofade beige-dk"></div>
-    </div>
-</section>
-
-<!-- Height spacing helper -->
-<div class="heightblock"></div>
-<!-- // End height spacing helper -->
-
-<!-- ============================ END Hero Image =========================== -->
+      
 <section id="intro">
     <div class="container">
         <div class="row col-md-offset-2">
             <div class="col-md-8">
-                <h1>关于我</h1>
+    			<span class="post-meta">
+      <time datetime="2017-09-09T16:00:00.000Z" itemprop="datePublished">
+          2017-09-10
+      </time>
+    
+</span>
+                <h1>socket进行通信</h1>
             </div>
         </div>
         <div class="col-md-8 col-md-offset-2">
-            <p>我是一名大三的学生，兜兜转转忙忙碌碌已经度过了三年大学生涯了。在大学里学到了很多东西，但大多数却都是学完就丢，没有好好地记录下来。<br>曾尝试过许许多多记录生活的方法，买过手账本，写过日记，却也都半途而废了，如今建立起这一个博客，希望自己能够将平时生活中的所见所闻全都记录在这里——不仅仅是学习，还可能会有一些自己生活的感悟、以前写过的一些文章又或是一些自己喜爱的句子。</p>
-<blockquote>
-<p>希望自己通过写博客，让自己那些好的坏的回忆，都能有一个归宿。<br>最后，欢迎您的到来，也希望你能在此得到一些愉快的回忆和宝贵的知识</p>
-</blockquote>
+      		<p>该篇博文是一个最简单的socket通信的实例，先运行server.java，然后再运行client.java</p>
+<h2 id="server："><a href="#server：" class="headerlink" title="server："></a>server：</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.net.ServerSocket;</div><div class="line"><span class="keyword">import</span> java.net.Socket;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Server</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		<span class="keyword">int</span> portNumber = <span class="number">12001</span>;</div><div class="line">		ServerSocket serverSocket = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			serverSocket = <span class="keyword">new</span> ServerSocket(portNumber);</div><div class="line"></div><div class="line">			Socket clientSocket = serverSocket.accept();</div><div class="line">			System.out.println(<span class="string">"client comes in, "</span> + clientSocket.getInetAddress());</div><div class="line">			BufferedReader in = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(</div><div class="line">					clientSocket.getInputStream()));</div><div class="line">			String inputLine = <span class="keyword">null</span>;</div><div class="line">			<span class="keyword">while</span> ((inputLine = in.readLine()) != <span class="keyword">null</span>) &#123;</div><div class="line">				System.out.println(<span class="string">"recv from client : "</span> + inputLine);</div><div class="line">				clientSocket.close();</div><div class="line">			&#125;</div><div class="line">			</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;<span class="keyword">finally</span>&#123;</div><div class="line">			serverSocket.close();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>##client:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> java.io.BufferedReader;</div><div class="line"><span class="keyword">import</span> java.io.IOException;</div><div class="line"><span class="keyword">import</span> java.io.InputStreamReader;</div><div class="line"><span class="keyword">import</span> java.io.PrintWriter;</div><div class="line"><span class="keyword">import</span> java.net.Socket;</div><div class="line"></div><div class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Client</span> </span>&#123;</div><div class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> IOException </span>&#123;</div><div class="line">		String hostName = <span class="string">"localhost"</span>;</div><div class="line">		<span class="keyword">int</span> portNumber = <span class="number">12001</span>;</div><div class="line">		Socket clientSocket = <span class="keyword">null</span>;</div><div class="line">		<span class="keyword">try</span> &#123;</div><div class="line">			clientSocket = <span class="keyword">new</span> Socket(hostName, portNumber);</div><div class="line">			<span class="comment">//打开sock输入输出流</span></div><div class="line">			PrintWriter writer = <span class="keyword">new</span> PrintWriter(clientSocket.getOutputStream(), <span class="keyword">true</span>);</div><div class="line">			BufferedReader reader = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(clientSocket.getInputStream()));</div><div class="line">			BufferedReader stdIn = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(</div><div class="line">					System.in));</div><div class="line">			<span class="comment">//向svr签到</span></div><div class="line">			writer.println(stdIn.readLine());</div><div class="line">			<span class="comment">//读取svr返回的签到结果</span></div><div class="line">			<span class="comment">//System.out.println("server answers: "+reader.readLine());</span></div><div class="line">			clientSocket.close();</div><div class="line">		&#125; <span class="keyword">catch</span> (Exception e) &#123;</div><div class="line">			e.printStackTrace();</div><div class="line">		&#125;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<hr>
+<p>结果显示：</p>
+<p><img src="/img/1505056423679.png" alt="Alt text"></p>
 
             <div class="clearfix"></div>
+            <hr class="nogutter">
         </div>
-        
+        <nav class="pagination" role="pagination">
+    
+    <a class="pull-left" href="/2017/09/10/喜欢的话/" style="float: left;">
+        ← 喜欢的话
+    </a>
+    
+    
+</nav>
+
+        <div class="duoshuo">
+
+
+
+<div class="ds-thread" data-thread-key="2017/09/10/socket进行通信/" data-title="socket进行通信" data-url="http://yoursite.com/2017/09/10/socket进行通信/"></div>
+<script type="text/javascript">
+	var duoshuoQuery = {short_name:"duoshuo_name"};
+	window.addEventListener('load', function(){
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0]
+			|| document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+	});
+</script>
+</div>
     </div>
 </section>
-<section id="process">
-    <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-8 col-md-offset-2">
-                <div class="timeline-centered">
-                    <div class="line"></div>
-                    <div class="present">过去</div>
-                    <div class="dot_tp"></div>
-                    <div class="born">现在</div>
-                    <div class="dot_bt"></div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">1</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>2017/09/9 开启博客生涯</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                        <div class="timeline-entry">
-                            <div class="timeline-entry-inner">
-                                <div class="timeline-icon wow fadeInUp" data-wow-delay="0.2s">
-                                    <span class="number">2</span>
-                                </div>
-                                <div class="timeline-label wow fadeInUp" data-wow-delay="0.2s">
-                                    <p>...</p>
-                                </div>
-                            </div>
-                        </div>
-                    
-                </div>
-                <!-- timeline-centered -->
-            </div>
-        </div>
-    </div>
-</section>
+
 
       
 <!-- ============================ Footer =========================== -->
